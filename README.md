@@ -28,3 +28,8 @@ python3 manage.py makemigrations
 
 ./manage.py migrate
 python3 manage.py migrate
+
+#command to create superuser 
+python3 manage.py createsuperuser
+Username (leave blank to use 'aps'): Aps
+Email address: admin@thesocialtalks.com
