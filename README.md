@@ -11,3 +11,6 @@ source try_django/bin/activate
 
 #Deactivate virtual Env
 Deactivate
+
+#Install django with pip3
+pip3  install Django==2.2
