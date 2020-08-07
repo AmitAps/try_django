@@ -22,3 +22,9 @@ django-admin startproject try_django . # here . means this folder
 ./manage.py runserver
 python3 manage.py runserver
 
+#Makemigrations and migrate
+./manage.py makemigrations
+python3 manage.py makemigrations
+
+./manage.py migrate
+python3 manage.py migrate
