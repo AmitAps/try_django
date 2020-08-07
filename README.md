@@ -14,3 +14,6 @@ Deactivate
 
 #Install django with pip3
 pip3  install Django==2.2
+
+#startproject 
+django-admin startproject try_django . # here . means this folder
