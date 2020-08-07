@@ -17,3 +17,8 @@ pip3  install Django==2.2
 
 #startproject 
 django-admin startproject try_django . # here . means this folder
+
+#To run development server
+./manage.py runserver
+python3 manage.py runserver
+
