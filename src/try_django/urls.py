@@ -15,11 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,re_path #url
-
+from news.views import article_detail
 from .views import home_page,about_page,contact_page
 urlpatterns = [
     path('tst-admin/', admin.site.urls),
     path('home/', home_page),
+    path('news/<int:article_id>/',article_detail),
+    #re_path(r'^news/(?P<article_id>\d+)/$',article_detail),
     # path('page/', about_page),
     # path('pages/', about_page),
     re_path('pages?/$', about_page),
