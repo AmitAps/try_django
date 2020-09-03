@@ -7,4 +7,4 @@ class Article(models.Model):
     title = models.TextField()
     slug = models.SlugField(unique=True) #hello world --> hello-world
     content = models.TextField(null=True, blank=True)
-#2.05
+#2.52

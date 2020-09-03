@@ -14,16 +14,23 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path,re_path #url
+from django.urls import path,re_path, include #url
 
-from news.views import article_detail, article_list_view
+from news.views import (
+                        article_create_view,
+                        )
 
 from .views import home_page,about_page,contact_page
 urlpatterns = [
     path('tst-admin/', admin.site.urls),
     path('home/', home_page),
-    path('news/',article_list_view),
-    path('news/<int:article_id>/<str:slug>/',article_detail),
+    # path('news/',article_list_view),
+    # #path('news/create/',article_create_view), #it will create issues with article_id and slug
+    # path('news/<int:article_id>/<str:slug>/',article_detail_view),
+    path('article-new/',article_create_view),
+    path('news/', include('news.urls')),
+    # path('news/<int:article_id>/<str:slug>/edit/',article_update_view),
+    # path('news/<int:article_id>/<str:slug>/delete/',article_delete_view),
     #re_path(r'^news/(?P<article_id>\d+)/$',article_detail),
     # path('page/', about_page),
     # path('pages/', about_page),
