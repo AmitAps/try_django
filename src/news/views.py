@@ -2,6 +2,7 @@ from django.http import Http404
 from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
+from .forms import  ArticleModelForm # ArticlePostForm
 from .models import Article
 
 # def article_detail(request,article_id,slug):
@@ -31,15 +32,38 @@ def article_list_view(request):
     #list out objects
     #could be search
     qs = Article.objects.all() #queryset --> list of python objects
-    template_name = "article_list.html"
+    template_name = "news/list.html"
     context = {"object_list": qs}
     return render(request, template_name, context)
 
+#forms Form
+# def article_create_view(request):
+#     #create objects
+#     # ? use a form
+#     form = ArticlePostForm(request.POST or None)
+#     if form.is_valid():
+#         #print(form.cleaned_data)
+#         obj = Article.objects.create(**form.cleaned_data)
+#         form = ArticlePostForm()
+#     template_name = "news/form.html"
+#     context = {"form": form}
+#     return render(request, template_name, context)
+
+#modelform
 def article_create_view(request):
     #create objects
     # ? use a form
-    template_name = "article_create.html"
-    context = {"object": None}
+    form = ArticleModelForm(request.POST or None)
+    if form.is_valid():
+        #print(form.cleaned_data)
+        #obj = Article.objects.create(**form.cleaned_data)
+        obj = form.save(commit=False)
+        #obj.title = form.cleaned_data.get("title") + "0"
+        obj.save()
+        #form.save()
+        form = ArticleModelForm()
+    template_name = "news/form.html"
+    context = {"form": form}
     return render(request, template_name, context)
 
 
@@ -47,19 +71,19 @@ def article_detail_view(request,article_id,slug):
     #1 object --> detail view
     #could be search
     obj = get_object_or_404(Article, id=article_id, slug=slug)
-    template_name = "article_details3.html"
+    template_name = "news/details.html"
     context = {"object": obj}
     return render(request, template_name, context)
 
 def article_update_view(request,article_id,slug):
     obj = get_object_or_404(Article, id=article_id, slug=slug)
-    template_name = "article_update.html"
+    template_name = "news/update.html"
     context = {"object": obj, "form": None}
     return render(request, template_name, context)
 
 
 def article_delete_view(request,article_id,slug):
     obj = get_object_or_404(Article, id=article_id, slug=slug)
-    template_name = "article_delete.html"
+    template_name = "news/delete.html"
     context = {"object": obj}
     return render(request, template_name, context)
