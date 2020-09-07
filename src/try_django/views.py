@@ -2,13 +2,14 @@ from django.http import HttpResponse
 #to render templates
 from django.shortcuts import render
 from .forms import ContactForm
+from news.models import Article
 # def home_page(request):
 #     return HttpResponse("<h1>Hello world</h2>")
 def home_page(request):
-    my_title = "hello there..."
-    context = {"title": "my title"}
-    if request.user.is_authenticated:
-        context = {"title": my_title, "my_list": [1,2,6,4,8]}
+    qs = Article.objects.all()[:5]
+    context = {"title": "Welcome to TST", 'article': qs}
+    # if request.user.is_authenticated:
+    #     context = {"title": my_title, 'article_post': article_post}
     # doc = "<h1>{title}</h1>".format(title=my_title)
     # django_rendered_doc = "<h1>{{ title }}</h1>".format(title=my_title)
     #print(context)

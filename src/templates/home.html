@@ -1,16 +1,13 @@
 {% extends "base.html" %}
 
 {% block content %}
-{{ title }}
-
-{{ user }}
-
-{{ user.is_authenticated }}
+<h1>{{ title }}</h1>
 
 
 
-{% for list in my_list %}
-  <li>{{ list }}</li>
+
+{% for list_a in article %}
+  {% include 'news/list-inline.html' with article=list_a %}
 {% endfor %}
 
 {% endblock %}

@@ -1,8 +1,10 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div class="row">
   {% for object in object_list %}
-  <li
-    <h1>{{ object.title }}</h1> </li>
+  {% include 'news/list-inline.html' with article=object %}
+
   {% endfor%}
+  </div>
 {% endblock %}

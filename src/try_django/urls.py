@@ -23,7 +23,7 @@ from news.views import (
 from .views import home_page,about_page,contact_page
 urlpatterns = [
     path('tst-admin/', admin.site.urls),
-    path('home/', home_page),
+    path('', home_page),
     # path('news/',article_list_view),
     # #path('news/create/',article_create_view), #it will create issues with article_id and slug
     # path('news/<int:article_id>/<str:slug>/',article_detail_view),
