@@ -7,7 +7,7 @@
 
 
 {% for list_a in article %}
-  {% include 'news/list-inline.html' with article=list_a %}
+  {% include 'news/list-inline.html' with article=list_a truncate=True detail=False %}
 {% endfor %}
 
 {% endblock %}

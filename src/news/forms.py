@@ -11,7 +11,7 @@ from .models import Article
 class  ArticleModelForm(forms.ModelForm):
     class Meta:
         model = Article
-        fields = ['title','slug','content']
+        fields = ['title','slug','image','content','publish_date']
 
     def clean_title(self, *args, **kwargs):
         #print(dir(self))

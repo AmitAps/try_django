@@ -34,7 +34,11 @@ from .models import Article
 def article_list_view(request):
     #list out objects
     #could be search
-    qs = Article.objects.all() #queryset --> list of python objects
+    #qs = Article.objects.all() #queryset --> list of python objects
+    qs = Article.objects.all().published() #queryset --> list of python objects
+    if request.user.is_authenticated:
+        my_qs = Article.objects.filter(user=request.user)
+        qs = (qs | my_qs).distinct()
     template_name = "news/list.html"
     context = {"object_list": qs}
     return render(request, template_name, context)
@@ -58,7 +62,7 @@ def article_list_view(request):
 def article_create_view(request):
     #create objects
     # ? use a form
-    form = ArticleModelForm(request.POST or None)
+    form = ArticleModelForm(request.POST or None, request.FILES or None)
     if form.is_valid():
         #print(form.cleaned_data)
         #obj = Article.objects.create(**form.cleaned_data)
@@ -84,7 +88,7 @@ def article_detail_view(request,article_id,slug):
 @staff_member_required
 def article_update_view(request,article_id,slug):
     obj = get_object_or_404(Article, id=article_id, slug=slug)
-    form = ArticleModelForm(request.POST or None, instance=obj)
+    form = ArticleModelForm(request.POST or None, request.FILES or None, instance=obj)
     if form.is_valid():
         form.save()
     template_name = "news/form.html"

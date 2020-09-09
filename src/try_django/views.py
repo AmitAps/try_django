@@ -7,6 +7,9 @@ from news.models import Article
 #     return HttpResponse("<h1>Hello world</h2>")
 def home_page(request):
     qs = Article.objects.all()[:5]
+
+    #qs = Article.objects.all().published() #queryset --> list of python objects
+
     context = {"title": "Welcome to TST", 'article': qs}
     # if request.user.is_authenticated:
     #     context = {"title": my_title, 'article_post': article_post}
